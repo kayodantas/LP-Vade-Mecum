@@ -94,14 +94,24 @@ export default function RootLayout({
       <Head>
         <meta
           httpEquiv="Content-Security-Policy"
-          content="
+          content={`
             default-src 'self';
+
+            /* Scripts: GTM, Panda Video, Stape e Facebook */
             script-src
               'self'
               'unsafe-inline'
               https://www.googletagmanager.com
               https://player.pandavideo.com.br
-              https://cdn.stape.io;
+              https://cdn.stape.io
+              https://connect.facebook.net;
+
+            /* CSS externos */
+            style-src
+              'self'
+              https://player.pandavideo.com.br;
+
+            /* Conexões (fetch, XHR): Stape, GTM, GA4 e seu domínio/subdomínios */
             connect-src
               'self'
               https://cdn.stape.io
@@ -109,6 +119,8 @@ export default function RootLayout({
               https://www.google-analytics.com
               https://*.metododeaprovacao.com.br
               https://data.metododeaprovacao.com.br;
+
+            /* Imagens/pixels: YT, Blob, Vercel Storage, GTM e seu domínio de e-mail */
             img-src
               'self'
               data:
@@ -116,8 +128,9 @@ export default function RootLayout({
               https://v0.blob.com
               https://*.vercel-storage.com
               https://*.blob.vercel-storage.com
-              https://www.googletagmanager.com;
-          "
+              https://www.googletagmanager.com
+              https://*.metododeaprovacao.com.br;
+          `}
         />
         <meta httpEquiv="Strict-Transport-Security" content="max-age=31536000; includeSubDomains; preload" />
         <link rel="preload" href="https://player.pandavideo.com.br/api.v2.js" as="script" />
