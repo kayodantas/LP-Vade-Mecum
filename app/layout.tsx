@@ -95,20 +95,21 @@ export default function RootLayout({
       className={`${inter.variable} ${dmSerifDisplay.variable}`}
     >
       <Head>
-        {/* Content Security Policy para GTM, Stape, PandaVideo, Facebook, Mautic e seu domínio */}
+        {/* Content Security Policy para GTM, Stape, PandaVideo, Facebook, Mautic, blob e seu domínio */}
         <meta
           httpEquiv="Content-Security-Policy"
           content={`
             default-src 'self';
 
-            /* Scripts: GTM, PandaVideo, Stape e Facebook */
+            /* Scripts: GTM, PandaVideo, Stape, Facebook e blob (v0 Dev UI) */
             script-src
               'self'
               'unsafe-inline'
               https://www.googletagmanager.com
               https://player.pandavideo.com.br
               https://cdn.stape.io
-              https://connect.facebook.net;
+              https://connect.facebook.net
+              blob:;
 
             /* Styles: inline (next/font) + externos */
             style-src
