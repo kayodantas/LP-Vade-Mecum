@@ -52,7 +52,7 @@ export default function Hero() {
           >
             <span className="block w-full">Todos os livros</span>
             <span className="block w-full gradient-text">Grifados e Anotados</span>
-            <span className="block w-full">pelas bancas em um material só</span>
+            <span className="block w-full">em um só material</span>
           </motion.h1>
 
           {/* Versão Desktop (2 linhas) - visível apenas em telas médias e maiores */}
