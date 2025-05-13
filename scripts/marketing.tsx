@@ -24,7 +24,7 @@ export function MarketingScripts() {
           __html: `
             function getParameterByName(name) {
               var url = window.location.href;
-              name = name.replace(/[\\[\\]]/g, '\\\\$&');
+              name = name.replace(/[\\[\\]]/g, '\\$&');
               var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
                   results = regex.exec(url);
               if (!results) return null;
@@ -55,7 +55,6 @@ export function MarketingScripts() {
 
 export function injectGTM() {
   if (typeof window !== "undefined") {
-    // Google Tag Manager
     ;((w, d, s, l, i) => {
       w[l] = w[l] || []
       w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" })
