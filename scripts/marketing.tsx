@@ -1,17 +1,17 @@
+// File: app/scripts/marketing.tsx
 'use client';
 import Script from 'next/script';
 
 export default function MarketingScripts() {
   const GTM_ID = 'GTM-NZS6993V';
-
   return (
     <>
-      {/* 1. Initialize dataLayer for Tag Assistant */}
+      {/* Initialize dataLayer for Tag Assistant */}
       <Script id="gtm-init" strategy="beforeInteractive">
         {`window.dataLayer = window.dataLayer || [];`}
       </Script>
 
-      {/* 2. Load Google Tag Manager */}
+      {/* Load Google Tag Manager */}
       <Script
         id="gtm-script"
         strategy="afterInteractive"
@@ -31,7 +31,7 @@ export default function MarketingScripts() {
         }}
       />
 
-      {/* 3. No-script fallback */}
+      {/* No-script fallback */}
       <noscript>
         <iframe
           src={`https://www.googletagmanager.com/ns.html?id=${GTM_ID}`}

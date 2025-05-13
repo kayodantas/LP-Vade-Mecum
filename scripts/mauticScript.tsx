@@ -1,3 +1,4 @@
+// File: app/scripts/mauticScript.tsx
 'use client';
 import Script from 'next/script';
 

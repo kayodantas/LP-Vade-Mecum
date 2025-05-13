@@ -1,6 +1,6 @@
 import React from 'react';
 import MarketingScripts from '@/scripts/marketing';
-import UtmTrackerInline from '@/scripts/utmTrackerInline';
+import UtmTracker from '@/scripts/utmTracker';
 import MauticScript from '@/scripts/mauticScript';
 
 export default function RootLayout({
@@ -17,8 +17,8 @@ export default function RootLayout({
         {/* 1) Google Tag Manager */}
         <MarketingScripts />
 
-        {/* 2) UTM Tracker Inline */}
-        <UtmTrackerInline />
+        {/* 2) UTM Tracker: appends UTM params to all links (including checkout) */}
+        <UtmTracker />
 
         {/* 3) Mautic Tracking Script */}
         <MauticScript />
