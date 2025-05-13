@@ -3,7 +3,7 @@
 import { useEffect } from 'react';
 import throttle from 'lodash.throttle';
 
-export function PreventHorizontalScroll() {
+export default function PreventHorizontalScroll() {
   useEffect(() => {
     const handler = throttle(() => {
       document.documentElement.style.width = `${window.innerWidth}px`;
