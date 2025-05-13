@@ -1,10 +1,9 @@
-// File: app/scripts/marketing.tsx
 'use client';
 import Script from 'next/script';
-import React from 'react';
 
-export function MarketingScripts() {
+export default function MarketingScripts() {
   const GTM_ID = 'GTM-NZS6993V';
+
   return (
     <>
       {/* 1. Initialize dataLayer for Tag Assistant */}

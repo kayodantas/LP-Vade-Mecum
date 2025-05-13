@@ -1,6 +1,7 @@
 import React from 'react';
-import { MarketingScripts } from '@/scripts/marketing';
-import { UtmTrackerInline } from '@/scripts/utmTrackerInline';
+import MarketingScripts from '@/scripts/marketing';
+import UtmTrackerInline from '@/scripts/utmTrackerInline';
+import MauticScript from '@/scripts/mauticScript';
 
 export default function RootLayout({
   children,
@@ -13,11 +14,14 @@ export default function RootLayout({
       <body>
         {children}
 
-        {/* 1) GTM */}
+        {/* 1) Google Tag Manager */}
         <MarketingScripts />
 
-        {/* 2) UTM inline (ativar apenas este, sem Mautic ainda) */}
+        {/* 2) UTM Tracker Inline */}
         <UtmTrackerInline />
+
+        {/* 3) Mautic Tracking Script */}
+        <MauticScript />
       </body>
     </html>
   );
