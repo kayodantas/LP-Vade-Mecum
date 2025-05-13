@@ -1,23 +1,23 @@
-import type React from "react"
-import type { Metadata } from "next"
-import { Inter, DM_Serif_Display } from "next/font/google"
-import "./globals.css"
-import { MarketingScripts } from "@/scripts/marketing"
-import { UtmTrackerInline } from "@/scripts/utmTrackerInline"
-import Head from 'next/head'
+import type React from "react";
+import type { Metadata } from "next";
+import { Inter, DM_Serif_Display } from "next/font/google";
+import "./globals.css";
+import { MarketingScripts } from "@/scripts/marketing";
+import { UtmTrackerInline } from "@/scripts/utmTrackerInline";
+import Head from "next/head";
 
 const inter = Inter({
   subsets: ["latin"],
   display: "swap",
   variable: "--font-inter",
-})
+});
 
 const dmSerifDisplay = DM_Serif_Display({
   weight: "400",
   subsets: ["latin"],
   display: "swap",
   variable: "--font-dm-serif",
-})
+});
 
 // Configuração do viewport separada (corrige os avisos do build)
 export const viewport = {
@@ -25,7 +25,7 @@ export const viewport = {
   initialScale: 1,
   maximumScale: 1,
   userScalable: "no",
-}
+};
 
 export const metadata: Metadata = {
   title: "Vade Mecum Grifado | Método de Aprovação",
@@ -63,8 +63,8 @@ export const metadata: Metadata = {
     ],
     apple: [{ url: "/apple-touch-icon.png" }],
   },
-  generator: 'v0.dev'
-}
+  generator: "v0.dev",
+};
 
 // Componente para o script do Mautic
 function MauticScript() {
@@ -81,23 +81,27 @@ function MauticScript() {
     `,
       }}
     />
-  )
+  );
 }
 
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode
+  children: React.ReactNode;
 }>) {
   return (
-    <html lang="pt-BR" className={`${inter.variable} ${dmSerifDisplay.variable}`}>
+    <html
+      lang="pt-BR"
+      className={`${inter.variable} ${dmSerifDisplay.variable}`}
+    >
       <Head>
+        {/* Content Security Policy para GTM, Stape, PandaVideo, Facebook, Mautic e seu domínio */}
         <meta
           httpEquiv="Content-Security-Policy"
           content={`
             default-src 'self';
 
-            /* Scripts: GTM, Panda Video, Stape e Facebook */
+            /* Scripts: GTM, PandaVideo, Stape e Facebook */
             script-src
               'self'
               'unsafe-inline'
@@ -106,12 +110,19 @@ export default function RootLayout({
               https://cdn.stape.io
               https://connect.facebook.net;
 
-            /* CSS externos */
+            /* Styles: inline (next/font) + externos */
             style-src
               'self'
+              'unsafe-inline'
               https://player.pandavideo.com.br;
 
-            /* Conexões (fetch, XHR): Stape, GTM, GA4 e seu domínio/subdomínios */
+            /* Fontes Google (Next.js Fonts) */
+            font-src
+              'self'
+              https://fonts.googleapis.com
+              https://fonts.gstatic.com;
+
+            /* Conexões (fetch, XHR): Stape, GTM, GA4 e seus domínios/subdomínios */
             connect-src
               'self'
               https://cdn.stape.io
@@ -120,10 +131,11 @@ export default function RootLayout({
               https://*.metododeaprovacao.com.br
               https://data.metododeaprovacao.com.br;
 
-            /* Imagens/pixels: YT, Blob, Vercel Storage, GTM e seu domínio de e-mail */
+            /* Imagens/pixels: self, data, blob, YT, BlobStorage, Vercel, GTM, e seu domínio */
             img-src
               'self'
               data:
+              blob:
               https://i.ytimg.com
               https://v0.blob.com
               https://*.vercel-storage.com
@@ -132,16 +144,28 @@ export default function RootLayout({
               https://*.metododeaprovacao.com.br;
           `}
         />
-        <meta httpEquiv="Strict-Transport-Security" content="max-age=31536000; includeSubDomains; preload" />
-        <link rel="preload" href="https://player.pandavideo.com.br/api.v2.js" as="script" />
-        <link rel="preload" href="https://player.pandavideo.com.br/styles.css" as="style" />
+        <meta
+          httpEquiv="Strict-Transport-Security"
+          content="max-age=31536000; includeSubDomains; preload"
+        />
+        <link
+          rel="preload"
+          href="https://player.pandavideo.com.br/api.v2.js"
+          as="script"
+        />
+        <link
+          rel="preload"
+          href="https://player.pandavideo.com.br/styles.css"
+          as="style"
+        />
         <MarketingScripts />
       </Head>
+
       <body className="min-h-screen bg-white font-sans antialiased overflow-x-hidden">
         <div className="overflow-x-hidden w-full">{children}</div>
         <UtmTrackerInline />
         <MauticScript />
       </body>
     </html>
-  )
+  );
 }
