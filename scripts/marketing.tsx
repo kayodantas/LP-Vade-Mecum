@@ -4,10 +4,17 @@ import Script from 'next/script';
 import React from 'react';
 
 export function MarketingScripts() {
-  // Hardcoded GTM ID to avoid missing env var
+  // Hardcoded GTM ID
   const GTM_ID = 'GTM-NZS6993V';
+
   return (
     <>
+      {/* 1. Inicializa dataLayer antes do GTM para Tag Assistant */}
+      <Script id="gtm-init" strategy="beforeInteractive">
+        {`window.dataLayer = window.dataLayer || [];`}
+      </Script>
+
+      {/* 2. Carrega o GTM */}
       <Script
         id="gtm-script"
         strategy="afterInteractive"
@@ -21,6 +28,8 @@ export function MarketingScripts() {
           `,
         }}
       />
+
+      {/* 3. Fallback sem JS */}
       <noscript>
         <iframe
           src={`https://www.googletagmanager.com/ns.html?id=${GTM_ID}`}
