@@ -46,8 +46,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               https://*.vercel-storage.com
               https://www.googletagmanager.com
               https://*.metododeaprovacao.com.br;
-            frame-src 'self' https://player.pandavideo.com.br;
-            child-src 'self' https://player.pandavideo.com.br;
+            frame-src 'self' https://player.pandavideo.com.br https://*.pandavideo.com.br;
+            child-src 'self' https://player.pandavideo.com.br https://*.pandavideo.com.br;
           `}
         />
 
