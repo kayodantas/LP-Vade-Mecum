@@ -7,6 +7,7 @@ import UtmTracker from '@/scripts/utmTracker'
 import MauticScript from '@/scripts/mauticScript'
 import PreventHorizontalScroll from '@/scripts/preventHorizontalScroll'
 import UtmTrackerInline from '@/scripts/utmTrackerInline'
+import InjectXcod from '@/scripts/injectXcod'
 
 // Next.js Fonts
 const inter = Inter({ subsets: ['latin'], display: 'swap', variable: '--font-inter' })
@@ -30,12 +31,23 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               https://player.pandavideo.com.br
               https://cdn.stape.io
               https://connect.facebook.net
-              https://player.pandavideo.com.br
               blob:;
             style-src 'self' 'unsafe-inline' https://player.pandavideo.com.br;
             font-src 'self' https://fonts.googleapis.com https://fonts.gstatic.com;
-            connect-src 'self' https://cdn.stape.io https://www.googletagmanager.com https://www.google-analytics.com https://*.metododeaprovacao.com.br https://data.metododeaprovacao.com.br https://email.metododeaprovacao.com.br;
-            img-src 'self' data: blob: https://i.ytimg.com https://*.vercel-storage.com https://www.googletagmanager.com https://*.metododeaprovacao.com.br;
+            connect-src 'self'
+              https://cdn.stape.io
+              https://www.googletagmanager.com
+              https://www.google-analytics.com
+              https://*.metododeaprovacao.com.br
+              https://data.metododeaprovacao.com.br
+              https://email.metododeaprovacao.com.br;
+            img-src 'self' data: blob:
+              https://i.ytimg.com
+              https://*.vercel-storage.com
+              https://www.googletagmanager.com
+              https://*.metododeaprovacao.com.br;
+            frame-src 'self' https://player.pandavideo.com.br;
+            child-src 'self' https://player.pandavideo.com.br;
           `}
         />
 
@@ -53,7 +65,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {/* 6. Mautic */}
         <MauticScript />
 
-        {/* 7. Seu conteúdo */}
+        {/* 7. Injeta xcod em todos os links de checkout */}
+        <InjectXcod />
+
+        {/* 8. Conteúdo principal */}
         {children}
       </body>
     </html>

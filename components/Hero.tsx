@@ -75,8 +75,9 @@ export default function Hero() {
           {/* PandaVideo Script Loader */}
           <Script
             src="https://player.pandavideo.com.br/api.v2.js"
-            strategy="lazyOnload"
+            strategy="afterInteractive"
             onLoad={handleScriptLoad}
+
           />
 
           {/* VSL Video */}
