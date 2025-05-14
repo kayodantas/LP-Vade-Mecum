@@ -17,14 +17,22 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="pt-BR" className={`${inter.variable} ${dmSerif.variable}`}>
       <head>
-        {/* 1. Preload do PandaVideo */}
+        {/* Preconnect & Prefetch for PandaVideo domain */}
+        <link rel="preconnect" href="https://player.pandavideo.com.br" crossOrigin="anonymous" />
+        <link rel="dns-prefetch" href="https://player.pandavideo.com.br" />
+
+        {/* 1. Preload of PandaVideo script & styles */}
         <link rel="preload" href="https://player.pandavideo.com.br/api.v2.js" as="script" />
         <link rel="preload" href="https://player.pandavideo.com.br/styles.css" as="style" />
 
-        {/* 2. Content Security Policy */}
+        {/* 2. Early load PandaVideo script for faster initialization */}
+        <Script src="https://player.pandavideo.com.br/api.v2.js" strategy="beforeInteractive" />
+
+        {/* 3. Content Security Policy */}
         <meta
           httpEquiv="Content-Security-Policy"
-          content={`
+          content={
+            `
             default-src 'self';
             script-src 'self' 'unsafe-inline'
               https://www.googletagmanager.com
@@ -48,27 +56,28 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               https://*.metododeaprovacao.com.br;
             frame-src 'self' https://player.pandavideo.com.br https://*.pandavideo.com.br;
             child-src 'self' https://player.pandavideo.com.br https://*.pandavideo.com.br;
-          `}
+          `
+          }
         />
 
-        {/* 3. GTM + dataLayer init */}
+        {/* 4. GTM + dataLayer init */}
         <MarketingScripts />
       </head>
       <body className="min-h-screen bg-white font-sans antialiased overflow-x-hidden">
-        {/* 4. Previne scroll horizontal */}
+        {/* 5. Prevent horizontal scroll */}
         <PreventHorizontalScroll />
 
-        {/* 5. UTM inline + UTMs em links */}
+        {/* 6. UTM inline + append UTMs to links */}
         <UtmTrackerInline />
         <UtmTracker />
 
-        {/* 6. Mautic */}
+        {/* 7. Mautic tracking */}
         <MauticScript />
 
-        {/* 7. Injeta xcod em todos os links de checkout */}
+        {/* 8. Inject xcod into checkout links */}
         <InjectXcod />
 
-        {/* 8. Conteúdo principal */}
+        {/* 9. Main content */}
         {children}
       </body>
     </html>
