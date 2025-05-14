@@ -31,14 +31,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {/* 3. Content Security Policy */}
         <meta
           httpEquiv="Content-Security-Policy"
-          content={
-            `
+          content={`
             default-src 'self';
             script-src 'self' 'unsafe-inline'
               https://www.googletagmanager.com
               https://player.pandavideo.com.br
               https://cdn.stape.io
               https://connect.facebook.net
+              https://email.metododeaprovacao.com.br
               blob:;
             style-src 'self' 'unsafe-inline' https://player.pandavideo.com.br;
             font-src 'self' https://fonts.googleapis.com https://fonts.gstatic.com;
@@ -53,11 +53,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               https://i.ytimg.com
               https://*.vercel-storage.com
               https://www.googletagmanager.com
-              https://*.metododeaprovacao.com.br;
+              https://*.metododeaprovacao.com.br
+              https://cursos.metododeaprovacao.com.br;
             frame-src 'self' https://player.pandavideo.com.br https://*.pandavideo.com.br;
             child-src 'self' https://player.pandavideo.com.br https://*.pandavideo.com.br;
-          `
-          }
+          `}
         />
 
         {/* 4. GTM + dataLayer init */}
